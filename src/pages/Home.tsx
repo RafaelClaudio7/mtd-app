@@ -1,12 +1,24 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Flex, Heading, Input, Stack, Image, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  Flex,
+  Heading,
+  Input,
+  Stack,
+  Text
+} from "@chakra-ui/react";
+import todoData from "../api/data.json";
 
 export default function Home() {
   return (
     <Flex h="100vh" w="100vw" bg="#1E1E1E">
       <Box w="10vw" bg="#0D7377" className="left-side"></Box>
       <Flex flexDir="column" w="90vw">
-        <Heading
+        <Box
           display="flex"
           w="90vw"
           h="10vh"
@@ -26,25 +38,29 @@ export default function Home() {
             />
           </Box>
           <Avatar name="Rafael Tula" mr="20px" bg="teal.500" />
-        </Heading>
-        <Flex>
-          <Card maxW="sm" bg="#323232" ml="40px">
-            <CardBody>
-              <Stack mt="6" spacing="3">
-                <Heading size="sm" color="white" textAlign="center">Realizar protótipo da interface no figma</Heading>
-                <Text textAlign="center" color="#888888">
-                Criar telas de login e cadastro, e também a página home da aplicação
-                </Text>
-                <Text color="red.600" fontSize="sm">
-                  To do
-                </Text>
-              </Stack>
-            </CardBody>
-            <CardFooter>
-            <EditIcon w={5} h={5} color="#888888" />
-            <DeleteIcon w={5} h={5} color="#888888" />
-            </CardFooter>
-          </Card>
+        </Box>
+        <Flex wrap="wrap">
+          {todoData.map((todo) => (
+            <Card maxW="sm" bg="#323232" ml="40px" mb="40px" w="300px">
+              <CardBody>
+                <Stack mt="6" spacing="3">
+                  <Heading size="sm" color="white" textAlign="center">
+                    {todo.title}
+                  </Heading>
+                  <Text textAlign="center" color="#888888">
+                    {todo.description}
+                  </Text>
+                  <Text color="red.600" fontSize="sm">
+                    To do
+                  </Text>
+                </Stack>
+              </CardBody>
+              <CardFooter>
+                <EditIcon w={5} h={5} color="#888888"/>
+                <DeleteIcon w={5} h={5} color="#888888" />
+              </CardFooter>
+            </Card>
+          ))}
         </Flex>
       </Flex>
     </Flex>
