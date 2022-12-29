@@ -9,6 +9,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { Link as LinkRouter } from "react-router-dom";
+
 export default function Form() {
   return (
     <FormControl
@@ -48,9 +50,11 @@ export default function Form() {
           _hover={{ borderColor: "#14FFEC" }}
         ></Input>
         <Center mt="40px">
-          <Button colorScheme="teal" size="md">
-            Sign In
-          </Button>
+          <LinkRouter to="/home">
+            <Button colorScheme="teal" size="md">
+              Sign In
+            </Button>
+          </LinkRouter>
         </Center>
         <Text fontWeight="light" fontSize="small" mt="20px">
           Don't have an account?{" "}
