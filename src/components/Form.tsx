@@ -32,6 +32,7 @@ export default function Form() {
           type="email"
           name="email"
           id="email"
+          placeholder="myemail@example.com"
           borderColor="#0D7377"
           focusBorderColor="#14FFEC"
           _hover={{ borderColor: "#14FFEC" }}
@@ -41,6 +42,7 @@ export default function Form() {
           type="password"
           name="password"
           id="password"
+          placeholder="********"
           borderColor="#0D7377"
           focusBorderColor="#14FFEC"
           _hover={{ borderColor: "#14FFEC" }}
