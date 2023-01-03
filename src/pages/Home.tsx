@@ -5,8 +5,6 @@ import {
   Card,
   CardBody,
   CardFooter,
-  UnorderedList,
-  ListItem,
   Flex,
   Heading,
   Input,
@@ -40,7 +38,7 @@ const Home: React.FC = (): ReactElement => {
   }, []);
 
   return (
-    <Flex w="100vw" bg="#1E1E1E" overflow="hidden">
+    <Flex w="100%" bg="#1E1E1E" overflow="hidden">
       <Box minHeight="100vh" w="10vw" bg="#0D7377" className="left-side"></Box>
       <Flex flexDir="column">
         <Box
@@ -56,18 +54,19 @@ const Home: React.FC = (): ReactElement => {
               name="search-by-name"
               id="search-by-name"
               w="300px"
+              color="white"
               placeholder="Search a task by name"
               borderColor="#0D7377"
               focusBorderColor="#14FFEC"
               _hover={{ borderColor: "#14FFEC" }}
             />
           </Box>
-          <Avatar name="Rafael Tula" mr="20px" bg="teal.500" />
+          <Avatar name="Rafael" mr="20px" bg="teal.500" cursor="pointer" />
         </Box>
         <Divider />
-        <Box className="todos-container" p={10} w="90vw">
+        <Box p={10} w="90vw" bg="">
           <Center>
-            <Flex flexWrap="wrap">
+            <Flex flexWrap="wrap" justify="center">
               {todoData.map((todo: todoInterface) => {
                 if (todo.userId === 1)
                   return (
@@ -87,7 +86,7 @@ const Home: React.FC = (): ReactElement => {
                             <Text textAlign="center" color="#888888">
                               {todo.userId}
                             </Text>
-                            <Text color="red.600" fontSize="sm">
+                            <Text color="red" fontSize="sm">
                               To do
                             </Text>
                           </Stack>
