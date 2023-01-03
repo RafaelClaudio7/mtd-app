@@ -5,19 +5,44 @@ import {
   Card,
   CardBody,
   CardFooter,
+  UnorderedList,
+  ListItem,
   Flex,
   Heading,
   Input,
   Stack,
-  Text
+  Text,
+  Divider,
+  Center,
 } from "@chakra-ui/react";
-import todoData from "../api/data.json";
+import axios from "axios";
+import { ReactElement, useEffect, useState } from "react";
 
-export default function Home() {
+interface todoInterface {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
+}
+
+const Home: React.FC = (): ReactElement => {
+  const [todoData, setTodoData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => {
+        setTodoData(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
-    <Flex h="100vh" w="100vw" bg="#1E1E1E">
-      <Box w="10vw" bg="#0D7377" className="left-side"></Box>
-      <Flex flexDir="column" w="90vw">
+    <Flex w="100vw" bg="#1E1E1E" overflow="hidden">
+      <Box minHeight="100vh" w="10vw" bg="#0D7377" className="left-side"></Box>
+      <Flex flexDir="column">
         <Box
           display="flex"
           w="90vw"
@@ -39,30 +64,48 @@ export default function Home() {
           </Box>
           <Avatar name="Rafael Tula" mr="20px" bg="teal.500" />
         </Box>
-        <Flex wrap="wrap">
-          {todoData.map((todo) => (
-            <Card maxW="sm" bg="#323232" ml="40px" mb="40px" w="300px">
-              <CardBody>
-                <Stack mt="6" spacing="3">
-                  <Heading size="sm" color="white" textAlign="center">
-                    {todo.title}
-                  </Heading>
-                  <Text textAlign="center" color="#888888">
-                    {todo.description}
-                  </Text>
-                  <Text color="red.600" fontSize="sm">
-                    To do
-                  </Text>
-                </Stack>
-              </CardBody>
-              <CardFooter>
-                <EditIcon w={5} h={5} color="#888888"/>
-                <DeleteIcon w={5} h={5} color="#888888" />
-              </CardFooter>
-            </Card>
-          ))}
-        </Flex>
+        <Divider />
+        <Box className="todos-container" p={10} w="90vw">
+          <Center>
+            <Flex flexWrap="wrap">
+              {todoData.map((todo: todoInterface) => {
+                if (todo.userId === 1)
+                  return (
+                    <Box overflowX="hidden" key={todo.id}>
+                      <Card
+                        maxW="sm"
+                        bg="#323232"
+                        ml="40px"
+                        mb="40px"
+                        w="300px"
+                      >
+                        <CardBody>
+                          <Stack mt="6" spacing="3">
+                            <Heading size="sm" color="white" textAlign="center">
+                              {todo.title}
+                            </Heading>
+                            <Text textAlign="center" color="#888888">
+                              {todo.userId}
+                            </Text>
+                            <Text color="red.600" fontSize="sm">
+                              To do
+                            </Text>
+                          </Stack>
+                        </CardBody>
+                        <CardFooter>
+                          <EditIcon w={5} h={5} color="#888888" />
+                          <DeleteIcon w={5} h={5} color="#888888" />
+                        </CardFooter>
+                      </Card>
+                    </Box>
+                  );
+              })}
+            </Flex>
+          </Center>
+        </Box>
       </Flex>
     </Flex>
   );
-}
+};
+
+export default Home;
