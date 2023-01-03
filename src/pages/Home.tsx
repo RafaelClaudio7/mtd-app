@@ -70,7 +70,7 @@ const Home: React.FC = (): ReactElement => {
               {todoData.map((todo: todoInterface) => {
                 if (todo.userId === 1)
                   return (
-                    <Box overflowX="hidden" key={todo.id}>
+                    <Box key={todo.id}>
                       <Card
                         maxW="sm"
                         bg="#323232"
@@ -86,8 +86,8 @@ const Home: React.FC = (): ReactElement => {
                             <Text textAlign="center" color="#888888">
                               {todo.userId}
                             </Text>
-                            <Text color="red" fontSize="sm">
-                              To do
+                            <Text color={todo.completed ? "green" : "red"} fontSize="sm">
+                              {todo.completed ? "Done" : "To do"}
                             </Text>
                           </Stack>
                         </CardBody>
