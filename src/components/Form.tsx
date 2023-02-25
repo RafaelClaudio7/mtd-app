@@ -8,10 +8,30 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
+import { useState, useContext } from "react";
 
-import { Link as LinkRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Form() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+
+  async function handleLogin() {
+    if (email && password) {
+      const isLogged = await auth.signIn(email, password);
+      if (isLogged) {
+        navigate("/home");
+      } else {
+        alert("Não funcionou.");
+      }
+    } else {
+      alert("Preencha todos os campos");
+    }
+  }
+
   return (
     <FormControl
       h="450px"
@@ -38,6 +58,7 @@ export default function Form() {
           borderColor="#0D7377"
           focusBorderColor="#14FFEC"
           _hover={{ borderColor: "#14FFEC" }}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <FormLabel htmlFor="password">Password</FormLabel>
         <Input
@@ -48,13 +69,12 @@ export default function Form() {
           borderColor="#0D7377"
           focusBorderColor="#14FFEC"
           _hover={{ borderColor: "#14FFEC" }}
+          onChange={(e) => setPassword(e.target.value)}
         ></Input>
         <Center mt="40px">
-          <LinkRouter to="/home">
-            <Button colorScheme="teal" size="md">
-              Sign In
-            </Button>
-          </LinkRouter>
+          <Button colorScheme="teal" size="md" onClick={() => handleLogin()}>
+            Sign In
+          </Button>
         </Center>
         <Text fontWeight="light" fontSize="small" mt="20px">
           Don't have an account?{" "}

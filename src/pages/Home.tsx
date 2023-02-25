@@ -61,7 +61,7 @@ const Home: React.FC = (): ReactElement => {
               _hover={{ borderColor: "#14FFEC" }}
             />
           </Box>
-          <Avatar name="Rafael" mr="20px" bg="teal.500" cursor="pointer" />
+          <Avatar name="Rafael Tula" mr="20px" bg="teal.500" cursor="pointer" />
         </Box>
         <Divider />
         <Box p={10} w="90vw" bg="">
@@ -86,7 +86,10 @@ const Home: React.FC = (): ReactElement => {
                             <Text textAlign="center" color="#888888">
                               {todo.userId}
                             </Text>
-                            <Text color={todo.completed ? "green" : "red"} fontSize="sm">
+                            <Text
+                              color={todo.completed ? "green" : "red"}
+                              fontSize="sm"
+                            >
                               {todo.completed ? "Done" : "To do"}
                             </Text>
                           </Stack>
